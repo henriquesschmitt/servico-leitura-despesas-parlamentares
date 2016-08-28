@@ -8,7 +8,7 @@ public class DownloadFile {
 
     public static void downloadAndSaveFile(String stringUrl, String origem) {
         
-        System.out.println("localizando despesas no portal do senado federal...");
+        System.out.println("LOCALIZANDO DESPESAS NO PORTAL DO SENADO FEDERAL...");
         try {
             URL url = new URL(stringUrl);
             System.out.println("arquivo localizado, realizando download...");
@@ -20,9 +20,9 @@ public class DownloadFile {
             }
             is.close();
             fos.close();
-            System.out.println("download realizado com sucesso!");
+            System.out.println("DOWNLOAD REALIZADO COM SUCESSO!");
         } catch (Exception e) {
-            System.out.println("erro ao processar download de arquivo: " + e.getMessage());
+            System.out.println("ERRO AO PROCESSAR DOWNLOAD DO ARQUIVO: " + e.getMessage());
         }
     }
 
