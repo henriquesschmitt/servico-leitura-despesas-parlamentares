@@ -15,13 +15,10 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.sql.Date;
 import java.text.DateFormat;
-import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.service.dominio.Despesa;
 
@@ -74,13 +71,16 @@ public class ReadAndPersistFile {
 						data = country[7] != null ? new java.sql.Date(fmt.parse(dataConvertida).getTime())
 								: new java.sql.Date(new java.util.Date().getTime());
 					} catch (ParseException ex) {
-						Logger.getLogger(ReadAndPersistFile.class.getName()).log(Level.SEVERE, null, ex);
+						System.out.println("erro na data = " + ex.getMessage());
 					}
 
 					String descricaoDespesa = new String(country[8].replace("\"", ""));	
 					
-					BigDecimal valor = null;
+					BigDecimal valor = new BigDecimal(0);
 					try {
+						
+						System.out.println("-------------");
+						System.out.println("Valor antes de ser lido = " + country[9]);
 						
 						String valorConvertido = "";
 						if(country[9].equals("\"")){
@@ -90,10 +90,14 @@ public class ReadAndPersistFile {
 						}
 						valor = valorConvertido != null ? new BigDecimal(valorConvertido)
 								: new BigDecimal(BigInteger.ZERO);
+						
+						System.out.println("valor depois de ser lido = " + valorConvertido);
+						System.out.println("-------------");
 					
 					} catch (Exception e) {
 						System.out.println("erro no valor = " + e.getMessage());
 					}
+					System.out.println("valor = " + valor);
 										
 					Despesa despesa = new Despesa(ano, mes, tipoParlamentar, nome, tipoDespesa, cpfCnpj,
 							fornecedor, documento, data, descricaoDespesa, valor);
